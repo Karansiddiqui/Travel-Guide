@@ -1,15 +1,15 @@
 # Travel Guide API Documentation
 
 ### API Endpoints
-
+### Prefix for api : http://localhost:7000/
 - **Register API:**  
-  `POST` http://localhost:7000/api/v1/auth/register
+  `POST` /api/v1/auth/register
 
 - **Login API:**  
-  `POST` http://localhost:7000/api/v1/auth/login
+  `POST` /api/v1/auth/login
 
 - **Logout API:**  
-  `POST` http://localhost:7000/api/v1/auth/logout
+  `POST` /api/v1/auth/logout
 
 ---
 
