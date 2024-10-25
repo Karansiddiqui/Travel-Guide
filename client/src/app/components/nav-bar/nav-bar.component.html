@@ -1,0 +1,72 @@
+<div class="relative bg-white shadow-md">
+  <nav class="navbar h-16 flex justify-around items-center p-4">
+    <div (click)="onLogoClick()" class="flex items-center cursor-pointer">
+      <span class="text-orange-500 text-2xl mr-2">✈️</span>
+      <h1 class="text-3xl font-bold uppercase text-blue-600">
+        <span class="text-orange-500 mr-1">Let’s</span> travel
+      </h1>
+    </div>
+
+    <div>
+      <ul class="flex space-x-8 h-16 items-center">
+        <li class="relative group h-8">
+          <span
+            class="cursor-pointer font-light tracking-wide transition duration-300"
+            >Accommodation</span
+          >
+          <span
+            class="absolute left-0 right-0 bottom-0 h-1 bg-orange-500 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+            style="margin-top: 4px"
+          ></span>
+        </li>
+        <li class="relative group h-8">
+          <span
+            class="cursor-pointer font-light tracking-wide transition duration-300"
+            >Gallery</span
+          >
+          <span
+            class="absolute left-0 right-0 bottom-0 h-1 bg-orange-500 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+            style="margin-top: 4px"
+          ></span>
+        </li>
+        <li class="relative group h-8">
+          <span
+            class="cursor-pointer font-light tracking-wide transition duration-300"
+            >Feedback</span
+          >
+          <span
+            class="absolute left-0 right-0 bottom-0 h-1 bg-orange-500 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+            style="margin-top: 4px"
+          ></span>
+        </li>
+        <li class="relative group h-8">
+          <span
+            class="cursor-pointer font-light tracking-wide transition duration-300"
+            >Agent Registration</span
+          >
+          <span
+            class="absolute left-0 right-0 bottom-0 h-1 bg-orange-500 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+            style="margin-top: 4px"
+          ></span>
+        </li>
+        <li class="relative group h-8">
+          <span
+            class="cursor-pointer font-light tracking-wide transition duration-300"
+            >Admin</span
+          >
+          <span
+            class="absolute left-0 right-0 bottom-0 h-1 bg-orange-500 scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
+            style="margin-top: 4px"
+          ></span>
+        </li>
+        <li>
+          <a
+            routerLink="/register"
+            class="cursor-pointer font-semibold inline-block px-4 py-2 border-2 border-gray-700 rounded text-gray-800 hover:bg-orange-600 hover:border-orange-600 hover:text-white transition duration-300"
+            >Login / Register</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

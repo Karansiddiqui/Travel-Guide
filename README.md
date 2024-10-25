@@ -1,5 +1,11 @@
 # Travel Guide API Documentation
 
+### Client : `cd .\client\`
+**then**
+`npm run start` OR `ng serve`
+
+### Server :  `cd .\server\`
+**then**`npm run nodemon`
 ### API Endpoints
 ### Prefix for api : http://localhost:7000/
 - **Register API:**  

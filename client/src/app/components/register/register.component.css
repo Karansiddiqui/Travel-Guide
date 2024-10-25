@@ -1,0 +1,16 @@
+.angled-form {
+    clip-path: polygon(15% 0%, 100% 0%, 100% 99%, 0% 100%);
+}
+
+/* Add these styles to your CSS file */
+.toggle-animation {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .toggle-animation.leave {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  

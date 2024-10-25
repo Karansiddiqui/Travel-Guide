@@ -1,0 +1,202 @@
+<div class="flex items-center justify-center">
+  <div class="relative flex-1">
+    <img
+      src="https://www.goophe.com/wp-content/uploads/2018/05/akshardham.com_Laptop-with-HiDPI-screen-2.png"
+      class="h-[93.6vh] w-[100vw] object-cover"
+    />
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+  </div>
+  <div
+    class="absolute angled-form bg-white opacity-80 h-[93.6vh] w-[50vw] right-0 flex flex-col justify-center items-center"
+  >
+    <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">
+      {{ isRegistering ? "Sign Up" : "Log In" }}
+    </h2>
+
+    <form
+      [formGroup]="isRegistering ? signUpForm : loginForm"
+      (ngSubmit)="isRegistering ? onRegisterSubmit() : onLoginSubmit()"
+      class="flex flex-col w-96"
+    >
+      <div *ngIf="isRegistering; else loginTemplate">
+        <!-- Username Field -->
+        <div class="flex items-center border border-gray-300 rounded-md">
+          <span class="flex items-center p-2 text-gray-600">
+            <i class="fas fa-user"></i>
+          </span>
+          <input
+            formControlName="userName"
+            type="text"
+            placeholder="Username"
+            class="flex-1 p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        <div
+          *ngIf="
+            signUpForm.get('userName')?.invalid &&
+            (signUpForm.get('userName')?.touched ||
+              signUpForm.get('userName')?.dirty)
+          "
+          class="text-red-600"
+        >
+          <small>Username is required.</small>
+        </div>
+
+        <!-- Full Name Field -->
+        <div class="flex items-center border border-gray-300 rounded-md mt-6">
+          <span class="flex items-center p-2 text-gray-600">
+            <i class="fas fa-user-circle"></i>
+          </span>
+          <input
+            formControlName="fullName"
+            type="text"
+            placeholder="Full Name"
+            class="flex-1 p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        <div
+          *ngIf="
+            signUpForm.get('fullName')?.invalid &&
+            (signUpForm.get('fullName')?.touched ||
+              signUpForm.get('fullName')?.dirty)
+          "
+          class="text-red-600"
+        >
+          <small>Full Name is required.</small>
+        </div>
+
+        <!-- Email Field -->
+        <div class="flex items-center border border-gray-300 rounded-md mt-6">
+          <span class="flex items-center p-2 text-gray-600">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <input
+            formControlName="email"
+            type="email"
+            placeholder="name@company.com"
+            class="flex-1 p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        <div
+          *ngIf="
+            signUpForm.get('email')?.invalid &&
+            (signUpForm.get('email')?.touched || signUpForm.get('email')?.dirty)
+          "
+          class="text-red-600"
+        >
+          <small *ngIf="signUpForm.get('email')?.errors?.['required']"
+            >Email is required.</small
+          >
+          <small *ngIf="signUpForm.get('email')?.errors?.['email']"
+            >Email must be a valid email address.</small
+          >
+        </div>
+
+        <!-- Password Field -->
+        <div class="flex items-center border border-gray-300 rounded-md mt-6">
+          <span class="flex items-center p-2 text-gray-600">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="Password"
+            class="flex-1 p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        <div
+          *ngIf="
+            signUpForm.get('password')?.invalid &&
+            (signUpForm.get('password')?.touched ||
+              signUpForm.get('password')?.dirty)
+          "
+          class="text-red-600"
+        >
+          <small>Password must be at least 4 characters long.</small>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          class="mt-4 p-2 w-full bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+          type="submit"
+        >
+          <span *ngIf="loading">Loading...</span>
+          <span *ngIf="!loading">Sign Up</span>
+        </button>
+      </div>
+
+      <ng-template #loginTemplate>
+        <!-- Login Email Field -->
+        <div class="flex items-center border border-gray-300 rounded-md">
+          <span class="flex items-center p-2 text-gray-600">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <input
+            formControlName="email"
+            type="email"
+            placeholder="Email"
+            class="flex-1 p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        <div
+          *ngIf="
+            loginForm.get('email')?.invalid &&
+            (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
+          "
+          class="text-red-600"
+        >
+          <small *ngIf="loginForm.get('email')?.errors?.['required']"
+            >Email is required.</small
+          >
+          <small *ngIf="loginForm.get('email')?.errors?.['email']"
+            >Email must be a valid email address.</small
+          >
+        </div>
+
+        <!-- Login Password Field -->
+        <div class="flex items-center border border-gray-300 rounded-md mt-6">
+          <span class="flex items-center p-2 text-gray-600">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input
+            formControlName="password"
+            type="password"
+            placeholder="Password"
+            class="flex-1 p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+        <div
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            (loginForm.get('password')?.touched ||
+              loginForm.get('password')?.dirty)
+          "
+          class="text-red-600"
+        >
+          <small>Password must be at least 4 characters long.</small>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          class="mt-4 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
+          type="submit"
+        >
+          <span *ngIf="loading">Loading...</span>
+          <span *ngIf="!loading">Log In</span>
+        </button>
+      </ng-template>
+
+      <!-- Error Message Display -->
+      <div *ngIf="errorMessage" class="text-red-600 mt-4">
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <!-- Toggle Button -->
+    <button class="mt-4 text-blue-500 hover:underline" (click)="toggleForm()">
+      {{
+        isRegistering ? "Already have an account? Log In" : "New here? Sign Up"
+      }}
+    </button>
+  </div>
+</div>
