@@ -25,10 +25,10 @@ export class RegisterComponent {
   ) {
     // Initialize sign-up form
     this.signUpForm = this.fb.group({
-      userName: ['', [Validators.required]],
+      userName: ['', [Validators.required, Validators.pattern(/^[a-z]+$/)]],
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(4),  Validators.pattern(/[A-Z]/)]],
     });
 
     // Initialize login form
@@ -56,22 +56,26 @@ export class RegisterComponent {
   
     // Use the ApiService to send registration data
     this.apiService.register(this.signUpForm.value).subscribe(
+      
       (response: any) => {
+        console.log("here");
+        console.log("res",response);
         this.loading = false;
         if (response.success) {
-          this.router.navigate(['/sign-in']);
+          this.isRegistering = false;
         } else {
+          
           // Loop through response errors and collect messages
-          this.errorMessage = response.errors.map((err: any) => err.message).join(', ');
+          console.log(response.errors);
+          
+          this.errorMessage = response.errors ? response.errors.map((err: any) => err.message).join(', ') : 'Registration failed';
         }
       },
       (error) => {
-        console.log(error);
-        
+        console.error("Error occurred:", error.error.message);
         this.loading = false;
         
-        // Loop through the error response from the backend and show all messages
-        this.errorMessage = error.error.errors.map((err: any) => err.message).join('\n');
+        this.errorMessage = error.error.message ? error.error.message : 'Registration failed';
       }
     );
   }
@@ -92,15 +96,15 @@ export class RegisterComponent {
       (response: any) => {
         this.loading = false;
         if (response.success) {
-          this.router.navigate(['/dashboard']); // Redirect to dashboard or other route
+          this.router.navigate(['/']);
         } else {
-          this.errorMessage = response.errors.map((err: any) => err.message).join(', ');
+          this.errorMessage = response.error.message ? response.error.message : 'Registration failed';
         }
       },
       (error) => {
         console.log(error);
         this.loading = false;
-        this.errorMessage = error.error.errors.map((err: any) => err.message).join('\n');
+        this.errorMessage = error.error.message ? error.error.message : 'Login failed';
       }
     );
   }

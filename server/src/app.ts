@@ -4,6 +4,7 @@ import authRouter from "./routers/auth.router.js";
 import { Request, Response, NextFunction } from "express";
 import cookieParser from "cookie-parser";
 import { ApiError } from "./utils/ApiError.js";
+import "dotenv/config";
 
 const app: Application = express();
 
