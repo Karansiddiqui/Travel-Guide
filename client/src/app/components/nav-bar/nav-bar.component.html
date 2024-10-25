@@ -61,9 +61,17 @@
         </li>
         <li>
           <a
-            routerLink="/register"
+          *ngIf="!isUserLoggedIn"
+            routerLink="/auth"
             class="cursor-pointer font-semibold inline-block px-4 py-2 border-2 border-gray-700 rounded text-gray-800 hover:bg-orange-600 hover:border-orange-600 hover:text-white transition duration-300"
             >Login / Register</a
+          >
+          <a
+            *ngIf="isUserLoggedIn"
+            routerLink="/auth"
+            (click)="onLogout()"
+            class="cursor-pointer font-semibold inline-block px-4 py-2 border-2 border-gray-700 rounded text-gray-800 hover:bg-orange-600 hover:border-orange-600 hover:text-white transition duration-300"
+            >Log Out</a
           >
         </li>
       </ul>

@@ -14,7 +14,7 @@ export const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: 'register',
+    path: 'auth',
     component: RegisterComponent,
   },
 ];

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from '../../services/api.service';  // Import your ApiService
+import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,7 +16,7 @@ export class RegisterComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
   loading = false;
-  isRegistering = false; // Toggle state
+  isRegistering = false;
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +40,7 @@ export class RegisterComponent {
 
   toggleForm() {
     this.isRegistering = !this.isRegistering;
-    this.errorMessage = null; // Clear error message on toggle
+    this.errorMessage = null;
   }
 
   onRegisterSubmit(): void {
@@ -81,7 +81,7 @@ export class RegisterComponent {
   }
 
   onLoginSubmit(): void {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
 
     if (this.loginForm.invalid) {
       this.errorMessage = 'Please fill out all fields';
@@ -94,12 +94,19 @@ export class RegisterComponent {
     // Use the ApiService to send login data
     this.apiService.login(this.loginForm.value).subscribe(
       (response: any) => {
+        
         this.loading = false;
+        
         if (response.success) {
-          this.router.navigate(['/']);
+          localStorage.setItem('user', response.data.user.email);
+          this.router.navigate(['/home']);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         } else {
           this.errorMessage = response.error.message ? response.error.message : 'Registration failed';
         }
+        
       },
       (error) => {
         console.log(error);
@@ -108,4 +115,6 @@ export class RegisterComponent {
       }
     );
   }
+
+ 
 }

@@ -5,6 +5,8 @@ import { ApiError } from "../utils/ApiError.js";
 import User from "../models/user.model.js";
 import { z } from "zod";
 
+
+
 const userSchema = z.object({
   userName: z
     .string()
@@ -107,6 +109,8 @@ const loginUser = asyncHandler(async (req: Request, res: Response) => {
 const signout = (req: Request, res: Response, next: NextFunction) => {
   try {
     console.log("Signing out...");
+    console.log(req.cookies);
+    
 
     if (!req.cookies.accessToken) {
       throw new ApiError(401, "User is not logged in");
