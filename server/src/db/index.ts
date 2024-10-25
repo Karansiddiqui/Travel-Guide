@@ -1,42 +1,27 @@
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
-dotenv.config({
-  path: "./.env",
-});
-const connectionDB = mysql.createPool({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  port: Number(process.env.DBPORT)
-});
+import mongoose from "mongoose";
+import cors from "cors";
+import Express from "express";
 
-const createSchema = async () => {
+const app = Express();
+
+app.use(cors());
+
+const connectDB = async (): Promise<void> => {
+  
   try {
-    // Connect to the database
-    await connectionDB.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DATABASE}`);
-    await connectionDB.query(`USE ${process.env.DATABASE}`);
-    
-    // Create Users table
-    await connectionDB.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(100) NOT NULL,
-        email VARCHAR(100) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL,
-        fullName VARCHAR(255) NOT NULL,
-        createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-      )
-    `);
+    const mongoUri = process.env.MONGODB_URI as string;
+    if (!mongoUri) {
+      throw new Error("MONGODB_URI is not defined in environment variables");
+    }
 
-    console.log("Users table created successfully");
-
+    const connectionInstance = await mongoose.connect(mongoUri);
+    console.log(
+      `\nMongoDB connected!! DB HOST: ${connectionInstance.connection.host}`
+    );
   } catch (error) {
-    console.error("Error creating schema: ", error);
+    console.error("MONGODB connection FAILED", error);
+    process.exit(1);
   }
 };
 
-// Call the function to create the schema
-createSchema();
-
-export default connectionDB;
+export default connectDB;

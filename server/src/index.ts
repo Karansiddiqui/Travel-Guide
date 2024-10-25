@@ -1,12 +1,11 @@
 import dotenv from "dotenv";
-import connectionDB from "./db/index.js";
+import connectDB from "./db/index.js";
 import app from "./app.js";
 dotenv.config({
   path: "./.env",
 });
 
-connectionDB
-  .query("SELECT 1")
+connectDB()
   .then(() => {
     console.log("Connected to the database");
     const port = process.env.PORT || 8000;
@@ -15,5 +14,5 @@ connectionDB
     });
   })
   .catch((err: Error) => {
-    console.error("SQL connection failed!!!", err);
+    console.error("Database connection failed!!!", err);
   });
